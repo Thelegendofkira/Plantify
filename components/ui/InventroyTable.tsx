@@ -6,6 +6,8 @@ import { Search } from "lucide-react";
 import { Skeleton } from "./skeleton";
 import { getPlants } from "@/actions/plant.actios";
 import { CreateDialog } from "./CreateDialog";
+import { DeleteDialog } from "./DeleteDialog";
+import { EditDialog } from "./EditDialogBox";
 import {
   Table,
   TableBody,
@@ -71,8 +73,8 @@ export function InventoryTable({plants}:InventoryTableProps) {
             <TableCell >{plant.stock}</TableCell>
             <TableCell className="text-right">
                 <div className="flex justify-end space-x-5" onClick={(e)=>{e.stopPropagation()}} >
-                    <h1>Delete</h1>
-                    <h1>Edit</h1>
+                    <DeleteDialog plants={plant}></DeleteDialog>
+                    <EditDialog plants={plant}></EditDialog>
                 </div>
             </TableCell>
           </TableRow>

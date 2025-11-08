@@ -48,5 +48,36 @@ export async function getPlantById(id:string){
         }
         catch(err){
             console.log("Error creating plant");
-        throw error;}
+        throw err;}
     }
+    export async function deleteplant(id:string){
+       try{
+         await prisma.plants.delete({
+            where:{
+                id:id
+            }
+        })
+         revalidatePath("/plants");
+        return {success:true}
+       }
+       catch(err){
+        return{success:false,errormsg:err}
+       }
+    }
+    export async function updatePlant(fromdata: Prisma.PlantsUpdateInput,id:string) {
+ 
+
+  try {
+    await prisma.plants.update({
+      where: { id },
+      data:{
+        ...fromdata
+      },
+    });
+      revalidatePath("/plants");
+    return { success: true };
+  } catch (err) {
+    console.log("updation failed", err);
+    return { success: false, errormsg: err };
+  }
+}

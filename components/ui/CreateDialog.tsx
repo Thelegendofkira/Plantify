@@ -19,8 +19,9 @@ import { Textarea } from "./textarea"
 import { Combobox } from "./combobox"
 import { createPlant } from "@/actions/plant.actios"
 import toast from "react-hot-toast"
+import ImageUpload from "./imageupload"
 
-export function CreateDialog() {
+export  function CreateDialog() {
     const [fromData ,setformData]=useState({
         name:"",
         description:"",
@@ -41,8 +42,9 @@ export function CreateDialog() {
         toast.success("Added a new Plant");
        }
        catch{
-        console.log("unnable to create ");}
-    toast.error("Adding plant failed");
+        console.log("unnable to create ");
+    toast.error("Adding plant failed")}
+    ;
     }
 
   return (
@@ -83,16 +85,22 @@ export function CreateDialog() {
             <div className="grid grid-cols-2 gap-4">
                 <div>
                     <Label htmlFor="stock">Stock</Label>
-                    <Input id="stock" type="number" placeholder="Enter Stock Quantity" value={fromData.stock} onChange={(e)=>{handleChange("stock",e.target.value)}}></Input>
+                    <Input id="stock" type="number" placeholder="Enter Stock Quantity" value={fromData.stock} onChange={(e)=>{handleChange("stock",Number(e.target.value))}}></Input>
                 </div>
                 <div>
                     <Label htmlFor="price">Price</Label>
-                    <Input id="price" type="number" placeholder="Enter Price" value={fromData.price} onChange={(e)=>{handleChange("price",e.target.value)}}></Input>
+                    <Input id="price" type="number" placeholder="Enter Price" value={fromData.price} onChange={(e)=>{handleChange("price",Number(e.target.value))}}></Input>
                 </div>
             </div>
-            <div className="py-5">
-                  upload Image
-            </div>
+           <div className="py-5">
+          <ImageUpload
+            endpoint="postImage"
+            value={fromData.imageUrl}
+            onChange={(url:string) => {
+              handleChange("imageUrl", url);
+            }}
+          />
+          </div>
              <AlertDialogFooter>
           <AlertDialogCancel type="button">Cancel</AlertDialogCancel>
           <AlertDialogAction type="submit">Submit</AlertDialogAction>
