@@ -28,7 +28,7 @@ export  async function getPlants(searchTerm?:String) {
     return{success:true,userPlants};
 }
 export async function getPlantById(id:string){
-    return await prisma.plants.findUnique({
+    return  prisma.plants.findUnique({
         where:{
             id
         }})
