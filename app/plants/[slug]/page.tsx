@@ -2,7 +2,7 @@
 import PlantCard from "./PlantCard"
 import { getPlantById } from "@/actions/plant.actios"
 export default async function PlantImage({params}:{params:{slug:string}}){
-    const {slug}=await params;
+    const {slug}= params;
     const [id]=slug.split("---");
     const plant=await getPlantById(id)
     return(
